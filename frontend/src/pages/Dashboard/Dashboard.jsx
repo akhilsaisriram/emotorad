@@ -57,7 +57,7 @@ import { SettingOutlined } from "@ant-design/icons";
 import { GrSchedules } from "react-icons/gr";
 import { useState } from "react";
 
-import Dashboardutils from "./dashboardutils";
+import Dashboardutils from "./Dashboardutils";
 import User from "./User";
 
 export default function Dashboard(image) {
