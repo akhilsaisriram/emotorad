@@ -26,6 +26,8 @@ export default function UserProfiles() {
       );
       setProfiles(response.data[0].profiles);
     } catch (error) {
+      alert(error.response.data?.error)
+
       console.error("Error fetching profiles:", error);
     } finally {
       setLoading(false);
@@ -48,6 +50,8 @@ export default function UserProfiles() {
       );
       setProfiles(profiles.filter((profile) => profile._id !== profileId));
     } catch (error) {
+            alert(error.response.data?.error)
+
       console.error("Error deleting profile:", error);
     }
   };
@@ -79,6 +83,8 @@ export default function UserProfiles() {
       message.success("Profile saved successfully!");
       setModalVisible(false);
     } catch (error) {
+            alert(error.response.data?.message)
+
       message.error("Profile submission failed");
     }
   };
