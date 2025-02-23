@@ -37,7 +37,7 @@ console.log('====================================');
 console.log(image.image.image);
 console.log('====================================');
   return (
-    <div className="flex-1 px-4 md:px-8 py-4 space-y-5 overflow-auto h-screen">
+    <div className="flex-1 px-4 md:px-8 md:py-4 space-y-5 overflow-auto h-screen">
       <div className="flex flex-col md:flex-row justify-between items-center bg-transparent shadow p-4 rounded-2xl">
         <h1 className="text-xl font-semibold">Dashboard</h1>
         <div className="flex items-center gap-4">
