@@ -43,7 +43,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
     // console.log(user);
     // res.redirect('http://localhost:5173/home');
     const token = generateToken(user._id);  
-    res.redirect(`http://localhost:5173/home?token=${token}`);
+    res.redirect(`${process.env.FRONTEND_URL}/home?token=${token}`);
 });
 
 router.get('/logout', (req, res) => {
