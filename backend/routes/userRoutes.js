@@ -10,43 +10,80 @@ router.get('/profile', protect, async (req, res) => {
 
     res.json(user);
 });
+// router.post("/addprofile", protect, async (req, res) => {
+//     try {
+//       const { name, email, phone, address1, address2, instagram, youtube, linkedin, github } = req.body;
+  
+//       console.log("Received Profile Data:", name, email, phone, address1, address2, instagram, youtube, linkedin, github);
+  
+//       let userProfile = await Profile.findOne({ userId: req.user.id });
+  
+//       if (!userProfile) {
+//         userProfile = new Profile({
+//           userId: req.user.id,
+//           profiles: [{ name, email, phone, address1, address2, instagram, youtube, linkedin, github }],
+//         });
+//       } else {
+//         // Ensure profiles array exists
+//         if (!Array.isArray(userProfile.profiles)) {
+//           userProfile.profiles = [];
+//         }
+  
+//         // Check if a profile with the same email already exists
+//         const isDuplicate = userProfile.profiles.some(profile => profile.email === email);
+  
+//         if (isDuplicate) {
+//           return res.status(400).json({ message: "Profile with this email already exists" });
+//         }
+  
+//         // Push new profile data if it's unique
+//         userProfile.profiles.push({ name, email, phone, address1, address2, instagram, youtube, linkedin, github });
+//       }
+  
+//       await userProfile.save();
+//       res.status(201).json({ message: "Profile added successfully", profile: userProfile });
+//     } catch (error) {
+//       res.status(500).json({ message: "Server Error", error: error.message });
+//     }
+//   });
+  
 router.post("/addprofile", protect, async (req, res) => {
-    try {
-      const { name, email, phone, address1, address2, instagram, youtube, linkedin, github } = req.body;
-  
-      console.log("Received Profile Data:", name, email, phone, address1, address2, instagram, youtube, linkedin, github);
-  
-      let userProfile = await Profile.findOne({ userId: req.user.id });
-  
-      if (!userProfile) {
-        userProfile = new Profile({
-          userId: req.user.id,
-          profiles: [{ name, email, phone, address1, address2, instagram, youtube, linkedin, github }],
-        });
-      } else {
-        // Ensure profiles array exists
-        if (!Array.isArray(userProfile.profiles)) {
-          userProfile.profiles = [];
-        }
-  
-        // Check if a profile with the same email already exists
-        const isDuplicate = userProfile.profiles.some(profile => profile.email === email);
-  
-        if (isDuplicate) {
-          return res.status(400).json({ message: "Profile with this email already exists" });
-        }
-  
-        // Push new profile data if it's unique
-        userProfile.profiles.push({ name, email, phone, address1, address2, instagram, youtube, linkedin, github });
-      }
-  
-      await userProfile.save();
-      res.status(201).json({ message: "Profile added successfully", profile: userProfile });
-    } catch (error) {
-      res.status(500).json({ message: "Server Error", error: error.message });
+  try {
+    console.log("Authenticated User ID:", req.user?.id); // Log user ID
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Unauthorized: No user ID found" });
     }
-  });
-  
+
+    const { name, email, phone, address1, address2, instagram, youtube, linkedin, github } = req.body;
+    console.log("Received Profile Data:", req.body);
+
+    let userProfile = await Profile.findOne({ userId: req.user.id });
+
+    if (!userProfile) {
+      userProfile = new Profile({
+        userId: req.user.id,
+        profiles: [{ name, email, phone, address1, address2, instagram, youtube, linkedin, github }],
+      });
+    } else {
+      if (!Array.isArray(userProfile.profiles)) {
+        userProfile.profiles = [];
+      }
+
+      const isDuplicate = userProfile.profiles.some(profile => profile.email === email);
+      if (isDuplicate) {
+        return res.status(400).json({ message: "Profile with this email already exists" });
+      }
+
+      userProfile.profiles.push({ name, email, phone, address1, address2, instagram, youtube, linkedin, github });
+    }
+
+    await userProfile.save();
+    res.status(201).json({ message: "Profile added successfully", profile: userProfile });
+  } catch (error) {
+    console.error("Error adding profile:", error);
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+});
 
 // Get Profiles for the Authenticated User
 router.get("/myprofiles", protect, async (req, res) => {
