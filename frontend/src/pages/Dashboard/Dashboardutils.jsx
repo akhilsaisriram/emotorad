@@ -11,13 +11,21 @@ import {
   Cell,
   CartesianGrid,
 } from "recharts";
-import { Input, Avatar, Badge, Button } from "antd";
-import { BellOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
+import { Input, Avatar, Badge, Button, Menu, Dropdown } from "antd";
+import {
+  BellOutlined,
+  LogoutOutlined,
+  PlusOutlined,
+  SearchOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { TbTransactionDollar } from "react-icons/tb";
 import { SlLike } from "react-icons/sl";
 import { LuUsersRound } from "react-icons/lu";
 import { useState } from "react";
 import ProfileDialog from "./ProfileDialog";
+import { useNavigate } from "react-router-dom";
+import api from "../../utils/axiosInstance";
 
 const revenueData = [
   { name: "Week 1", guest: 400, user: 300 },
@@ -33,11 +41,44 @@ const productData = [
 ];
 export default function Dashboardutils(image) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-console.log('====================================');
-console.log(image.image.image);
-console.log('====================================');
+  console.log("====================================");
+  console.log(image.image.image);
+  console.log("====================================");
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await api.get('/auth/logout');
+      console.log(response.data);
+      
+      sessionStorage.removeItem("token");
+
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+  const menu = (
+    <Menu className="rounded-lg shadow-lg border border-gray-200">
+      <Menu.Item
+        key="profile"
+        icon={<UserOutlined className="text-blue-500" />}
+      >
+        Profile
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item
+        key="logout"
+        icon={<LogoutOutlined className="text-red-500" />}
+        onClick={handleLogout}
+      >
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <div className="flex-1 px-4 md:px-8 md:py-4 space-y-5 overflow-auto h-screen">
+    <div className="flex-1 px-4 md:px-8  md:py-4 space-y-5 overflow-auto h-screen">
       <div className="flex flex-col md:flex-row justify-between items-center bg-transparent shadow p-4 rounded-2xl">
         <h1 className="text-xl font-semibold">Dashboard</h1>
         <div className="flex items-center gap-4">
@@ -49,8 +90,22 @@ console.log('====================================');
           <Badge count={3}>
             <BellOutlined className="text-xl cursor-pointer" />
           </Badge>
-          <Avatar s  src={image.image.image || "https://e7.pngegg.com/pngimages/778/849/png-clipart-computer-icons-user-login-avatar-small-icons-angle-heroes.png"}
-size={40} shape="circle" />
+          <Dropdown
+            overlay={menu}
+            trigger={["click"]}
+            placement="bottomRight"
+            arrow
+          >
+            <Avatar
+              src={
+                image?.image?.image ||
+                "https://e7.pngegg.com/pngimages/778/849/png-clipart-computer-icons-user-login-avatar-small-icons-angle-heroes.png"
+              }
+              size={40}
+              shape="circle"
+              className="cursor-pointer border border-gray-300 shadow-sm hover:shadow-md transition-all"
+            />
+          </Dropdown>
         </div>
       </div>
 
