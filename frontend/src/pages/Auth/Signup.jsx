@@ -47,7 +47,7 @@ export default function Signup() {
             className="w-20 h-20 transition-all duration-300 hover:scale-110 hover:shadow-xl"
           />
         </div>
-        <h1 className="relative z-10 text-6xl text-center ">BASE</h1>
+        <h1 className="relative z-10 text-6xl text-center bottom-18 ">BASE</h1>
         <div className="relative z-10 flex space-x-4 justify-center md:justify-start bottom-5 left-1/2 md:left-5 transform -translate-x-1/2 md:translate-x-0">
           <a
             href="https://github.com/"
