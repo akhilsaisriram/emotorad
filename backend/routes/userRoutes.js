@@ -118,7 +118,7 @@ const router = express.Router();
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Phone number validation regex (digits only, 10-15 characters)
-const phoneRegex = /^[0-9]{10,15}$/;
+const phoneRegex = /^[0-9]{10}$/;
 
 // Get User Profile
 router.get('/profile', protect, async (req, res) => {
