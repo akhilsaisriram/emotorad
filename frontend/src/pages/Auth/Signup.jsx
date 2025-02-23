@@ -30,7 +30,7 @@ export default function Signup() {
   const handleGoogleAuth = async () => {
 
   
-    window.location.href = `http://localhost:3000/auth/google`;
+    window.location.href = `${import.meta.env.VITE_BASE_URL}/auth/google`;
   
   };
  
