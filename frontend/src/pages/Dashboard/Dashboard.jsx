@@ -23,11 +23,11 @@ export default function Dashboard(image) {
 
       {/* Sidebar */}
       <div
-        className={`z-50 fixed inset-y-0 left-0 transform bg-blue-600 text-white p-6 space-y-6 w-64 md:w-[15vw] md:relative md:translate-x-0 transition-transform duration-300 ease-in-out ${
+        className={`z-50  fixed inset-y-0 left-0 transform bg-blue-600 text-white p-6 space-y-6 w-64 md:w-[15vw] md:relative md:translate-x-0 transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
-        } md:h-screen`}
+        } md:h-screen flex flex-col justify-between`}
       >
-        <h1 className="text-2xl font-bold md:mb-28">Board.</h1>
+        <h1 className="text-2xl font-bold md:mb-15">Board.</h1>
 
         <nav className="space-y-5 md:space-y-15 mt-6">
           {[
@@ -51,6 +51,11 @@ export default function Dashboard(image) {
             </a>
           ))}
         </nav>
+
+        <div className="space-y-3 mt-auto flex flex-col">
+          <a className="cursor-pointer text-white">Help</a>
+          <a className="cursor-pointer text-white">Contact Us</a>
+        </div>
       </div>
 
       {/* Main Content */}
