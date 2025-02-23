@@ -21,7 +21,7 @@ export default function Home() {
 
       if (!token) {
         console.error("No token found, authentication required.");
-        return;
+        navigate("/");
       }
 
       try {
@@ -33,6 +33,7 @@ export default function Home() {
         setUser(response.data);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
+         navigate("/");
       }
     };
 
