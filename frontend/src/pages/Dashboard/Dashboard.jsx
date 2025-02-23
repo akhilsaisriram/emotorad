@@ -1,57 +1,4 @@
 
-// import {  Home, TrendingUp, Users } from "lucide-react";
-
-// import {
-
-//   SettingOutlined,
-// } from "@ant-design/icons";
-
-// import { GrSchedules } from "react-icons/gr";
-// import { useState } from "react";
-
-// import Dashboardutils from "./dashboardutils";
-// import User from "./User";
-// export default function Dashboard(image) {
-//   const [selectedTab, setSelectedTab] = useState("Dashboard");
-
-//   return (
-//     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-//       {/* Sidebar */}
-//       <div className="w-full md:w-[15vw] bg-blue-600 text-white p-6 space-y-6 md:h-screen ">
-//         <h1 className="text-2xl font-bold md:mb-28">Board.</h1>
-       
-//         <nav className="space-y-5 md:space-y-15 mt-6">
-//         {[
-//             { name: "Dashboard", icon: Home },
-//             { name: "Transactions", icon: TrendingUp },
-//             { name: "Schedules", icon: GrSchedules },
-//             { name: "Users", icon: Users },
-//             { name: "Settings", icon: SettingOutlined },
-//           ].map((item, index) => (
-//             <a
-//               key={index}
-//               className={`flex items-center space-x-2 cursor-pointer ${
-//                 selectedTab === item.name ? "font-bold text-yellow-500" : ""
-//               }`}
-//               onClick={() => setSelectedTab(item.name)}
-//             >
-//               <item.icon /> <span>{item.name}</span>
-//             </a>
-//           ))}
-//         </nav>
-//       </div>
-
-//       {/* Main Content */}
-//       <div className="flex-1 overflow-y-auto h-screen">
-//         {/* Header */}
-//         {selectedTab === "Users" ? (
-//           <User />
-//         ) : (<Dashboardutils image={image}></Dashboardutils>)}
-      
-//       </div>
-//     </div>
-//   );
-// }
 import { Home, TrendingUp, Users, Menu } from "lucide-react";
 import { SettingOutlined } from "@ant-design/icons";
 import { GrSchedules } from "react-icons/gr";
@@ -76,7 +23,7 @@ export default function Dashboard(image) {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 transform bg-blue-600 text-white p-6 space-y-6 w-64 md:w-[15vw] md:relative md:translate-x-0 transition-transform duration-300 ease-in-out ${
+        className={`z-50 fixed inset-y-0 left-0 transform bg-blue-600 text-white p-6 space-y-6 w-64 md:w-[15vw] md:relative md:translate-x-0 transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         } md:h-screen`}
       >
